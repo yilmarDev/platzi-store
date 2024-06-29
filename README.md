@@ -24,6 +24,8 @@
 
 ## Description
 
+It's a learning project, implemented while follow the "Backend with NodeJS" Platzi course with the teacher Nicolas Molina.
+
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
