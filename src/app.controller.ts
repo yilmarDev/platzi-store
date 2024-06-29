@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { AppService } from './app.service';
+import { query } from 'express';
 
 @Controller()
 export class AppController {
@@ -11,6 +12,7 @@ export class AppController {
     return 'Hola Mundo de Node';
   }
 
+  /** GETTING NRMAL PARAMS */
   @Get(`endpoint1`)
   endpoint1() {
     return `I'm new 1`;
@@ -21,8 +23,13 @@ export class AppController {
     return `I'm new 2`;
   }
 
+  @Get(`products/filter`)
+  getProductFilter() {
+    return `Product filter path`;
+  }
+
   @Get(`products/:id`)
-  getProducts(@Param() params: any) {
+  getProduct(@Param() params: any) {
     return `Product number ${params.id}`;
   }
 
@@ -42,5 +49,16 @@ export class AppController {
   @Get(`clients/:id`)
   getClients(@Param('id') id: string) {
     return `Client number ${id}`;
+  }
+
+  /** GETTING QUERY PARAMS */
+
+  @Get(`products`)
+  getProducst(
+    @Query('limit') limit: number = 10,
+    @Query('offset') offset: number = 0,
+    @Query('brand') brand: string = 'NA',
+  ) {
+    return `Products: Limit: ${limit} | offset ${offset} | Brand: ${brand}`;
   }
 }
