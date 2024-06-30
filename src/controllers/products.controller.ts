@@ -8,12 +8,8 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
+import { Product } from 'src/entities/products.entity';
 
-interface Product {
-  name: string;
-  price: number;
-  amount: number;
-}
 @Controller('products')
 export class ProductsController {
   @Get()
