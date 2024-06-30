@@ -58,4 +58,34 @@ export class ProductsService {
     this.products.push(newProduct);
     return newProduct;
   }
+
+  update(id: string, payload: any) {
+    const product = this.products.find((index) => index.id === id);
+
+    if (product) {
+      const tmpProduct = { ...product, ...payload };
+      const tmpProducts = [...this.products, tmpProduct];
+      this.products = tmpProducts;
+
+      return tmpProduct;
+    } else
+      return {
+        message: 'product no found',
+      };
+  }
+
+  delete(id: string) {
+    const product = this.products.find((index) => index.id === id);
+
+    if (product) {
+      const tempProducts: Product[] = this.products.filter(
+        (index) => index.id != id,
+      );
+      this.products = tempProducts;
+    } else {
+      return {
+        message: 'product no found',
+      };
+    }
+  }
 }
