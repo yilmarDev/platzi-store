@@ -57,7 +57,7 @@ export class ProductsController {
   }
 
   @Delete(`:id`)
-  delete(@Param(`id`) id: number) {
+  delete(@Param(`:id`) id: number) {
     return {
       message: 'Product deleted',
       id,
