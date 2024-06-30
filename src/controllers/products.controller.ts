@@ -7,6 +7,7 @@ import {
   Body,
   Put,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { Product } from 'src/entities/products.entity';
 import { ProductsService } from 'src/services/products.service';
@@ -33,7 +34,7 @@ export class ProductsController {
   }
 
   @Get(`:id`)
-  getProduct(@Param('id') id: number) {
+  getProduct(@Param('id', ParseIntPipe) id: number) {
     // return { Product: `${params.id}` };
 
     return this.productService.findOne(id);

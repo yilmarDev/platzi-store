@@ -26,6 +26,8 @@
 
 It's a learning project, implemented while follow the "Backend with NodeJS" Platzi course with the teacher Nicolas Molina.
 
+<a href="https://yilmardev.notion.site/Nest-16642495f7ef439480d3143633e3b35a" target="_blank">Notas del curso en Notion</a>
+
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
