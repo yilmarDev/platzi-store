@@ -1,5 +1,10 @@
-import { Controller, Get, Query, Param } from '@nestjs/common';
+import { Controller, Get, Query, Param, Post, Body } from '@nestjs/common';
 
+interface Product {
+  name: string;
+  price: number;
+  amount: number;
+}
 @Controller('products')
 export class ProductsController {
   @Get()
@@ -11,13 +16,21 @@ export class ProductsController {
     return `Products: Limit: ${limit} | offset ${offset} | Brand: ${brand}`;
   }
 
+  @Get(`:id`)
+  getProduct(@Param() params: any) {
+    return `Product number ${params.id}`;
+  }
+
   @Get(`filter`)
   getProductFilter() {
     return `Product filter path`;
   }
 
-  @Get(`:id`)
-  getProduct(@Param() params: any) {
-    return `Product number ${params.id}`;
+  @Post()
+  create(@Body() payload: Product) {
+    return {
+      message: 'Create action executed',
+      payload,
+    };
   }
 }
