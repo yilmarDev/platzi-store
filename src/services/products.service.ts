@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Product } from 'src/entities/products.entity';
 
 @Injectable()
@@ -6,7 +6,7 @@ export class ProductsService {
   private counterId = 1;
   private products: Product[] = [
     {
-      id: '4586',
+      id: 4586,
       name: 'Product 1',
       description: 'Description 1',
       price: 58000,
@@ -14,7 +14,7 @@ export class ProductsService {
       image: '',
     },
     {
-      id: '7852',
+      id: 7852,
       name: 'Product 2',
       description: 'Description 2',
       price: 37000,
@@ -22,7 +22,7 @@ export class ProductsService {
       image: '',
     },
     {
-      id: '3987',
+      id: 3987,
       name: 'Product 3',
       description: 'Description 3',
       price: 69000,
@@ -30,7 +30,7 @@ export class ProductsService {
       image: '',
     },
     {
-      id: '4587',
+      id: 4587,
       name: 'Product 4',
       description: 'Description 4',
       price: 32900,
@@ -43,8 +43,11 @@ export class ProductsService {
     return this.products;
   }
 
-  findOne(id: string) {
-    return this.products.find((item) => item.id === id);
+  findOne(id: number) {
+    const product = this.products.find((item) => item.id == id);
+
+    if (!product) throw new NotFoundException(`Product #${id} not found`);
+    else return product;
   }
 
   create(payload: any) {
@@ -59,33 +62,34 @@ export class ProductsService {
     return newProduct;
   }
 
-  update(id: string, payload: any) {
-    const product = this.products.find((index) => index.id === id);
+  update(id: number, payload: any) {
+    const product = this.findOne(id);
+
+    // const product = this.products.find((index) => index.id == id);
 
     if (product) {
-      const tmpProduct = { ...product, ...payload };
-      const tmpProducts = [...this.products, tmpProduct];
-      this.products = tmpProducts;
+      const pIndex = this.products.findIndex((index) => index.id === id);
 
-      return tmpProduct;
-    } else
-      return {
-        message: 'product no found',
+      this.products[pIndex] = {
+        ...product,
+        ...payload,
       };
+
+      return this.products[pIndex];
+    } else return { data: `Data ${product}`, id: `${id}`, error: 'ERROR' };
   }
 
-  delete(id: string) {
-    const product = this.products.find((index) => index.id === id);
+  delete(id: number) {
+    // const product = this.products.find((index) => index.id === id);
+    const product = this.findOne(id);
 
     if (product) {
       const tempProducts: Product[] = this.products.filter(
         (index) => index.id != id,
       );
       this.products = tempProducts;
-    } else {
-      return {
-        message: 'product no found',
-      };
+
+      return product;
     }
   }
 }
