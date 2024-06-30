@@ -2,8 +2,6 @@ import { Controller, Get, Query, Param } from '@nestjs/common';
 
 @Controller('products')
 export class ProductsController {
-  /** GETTING QUERY PARAMS */
-
   @Get()
   getProducst(
     @Query('limit') limit: number = 10,
