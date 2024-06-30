@@ -14,7 +14,7 @@ export class ProductsService {
       image: '',
     },
     {
-      id: 7852,
+      id: 4587,
       name: 'Product 2',
       description: 'Description 2',
       price: 37000,
@@ -22,7 +22,7 @@ export class ProductsService {
       image: '',
     },
     {
-      id: 3987,
+      id: 4588,
       name: 'Product 3',
       description: 'Description 3',
       price: 69000,
@@ -30,7 +30,7 @@ export class ProductsService {
       image: '',
     },
     {
-      id: 4587,
+      id: 4589,
       name: 'Product 4',
       description: 'Description 4',
       price: 32900,
